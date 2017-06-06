@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Platform } from 'react-native';
+import { connect } from 'react-redux';
+import { Button } from 'react-native-elements';
+import { clearLikedJobs } from '../actions';
 
-export default class extends Component {
+ class SettingsScreen extends Component {
+  static navigationOptions = {
+    headerStyle: { marginTop: Platform.OS === 'android' ? 24 : 0 }
+  }
   render() {
     return <View>
-      <Text>Settings Screen</Text>
-      <Text>Settings Screen</Text>
-      <Text>Settings Screen</Text>
-      <Text>Settings Screen</Text>
-      <Text>Settings Screen</Text>
+      <Button large title='Reset Liked Jobs' icon={{ name: 'delete-forever' }} backgroundColor='#F44336' onPress={this.props.clearLikedJobs} />
     </View>;
   }
 }
+
+export default connect(null, { clearLikedJobs })(SettingsScreen);
